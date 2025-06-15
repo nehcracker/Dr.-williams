@@ -1,0 +1,81 @@
+.about-section {
+  padding: 6rem 0;
+  background-color: #f8f9fa;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: #1a2c41;
+  }
+  
+  .about-content {
+    display: flex;
+    gap: 4rem;
+    
+    @media (max-width: 992px) {
+      flex-direction: column;
+    }
+  }
+  
+  .about-text {
+    flex: 1;
+    
+    .core-narrative {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      color: #1a2c41;
+    }
+    
+    p {
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      color: #4a5568;
+    }
+  }
+  
+  .about-stats {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    
+    .stat-item {
+      flex: 1 0 45%;
+      text-align: center;
+      
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #1a2c41;
+        margin-bottom: 0.5rem;
+      }
+      
+      .stat-label {
+        color: #4a5568;
+        font-size: 1rem;
+      }
+    }
+    
+    .credentials {
+      width: 100%;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e2e8f0;
+      
+      .credential-item {
+        padding: 0.75rem 0;
+        color: #4a5568;
+        font-size: 1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+.philosophy-section {
+  padding: 6rem 0;
+  background-color: #1a2c41;
+  color: #fff;
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+  
+  .philosophy-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .philosophy-narrative {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+  }
+  
+  .philosophy-quote {
+    font-size: 1.75rem;
+    line-height: 1.4;
+    font-style: italic;
+    margin: 3rem 0;
+    padding: 0 2rem;
+    position: relative;
+    text-align: center;
+    
+    &:before, &:after {
+      content: '"';
+      font-size: 4rem;
+      position: absolute;
+      opacity: 0.2;
+    }
+    
+    &:before {
+      top: -1rem;
+      left: 0;
+    }
+    
+    &:after {
+      bottom: -2rem;
+      right: 0;
+    }
+    
+    .quote-attribution {
+      display: block;
+      font-size: 1rem;
+      margin-top: 1rem;
+      font-style: normal;
+      opacity: 0.8;
+    }
+  }
+  
+  .philosophy-pillars {
+    margin-top: 3rem;
+    
+    .pillars-title {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    
+    .pillars-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      list-style: none;
+      padding: 0;
+      
+      .pillar-item {
+        flex: 1 0 40%;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 1.25rem;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.15);
+          transform: translateY(-3px);
+        }
+      }
+    }
+  }
+}

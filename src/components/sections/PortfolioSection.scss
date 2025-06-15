@@ -1,0 +1,92 @@
+.portfolio-section {
+  padding: 6rem 0;
+  background-color: #f8f9fa;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    color: #1a2c41;
+  }
+  
+  .section-subtitle {
+    font-size: 1.25rem;
+    text-align: center;
+    color: #4a5568;
+    margin-bottom: 3rem;
+  }
+  
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .portfolio-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    
+    .portfolio-amount {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a2c41;
+    }
+    
+    .portfolio-year {
+      font-size: 1rem;
+      color: #718096;
+      padding: 0.35rem 0.75rem;
+      background-color: #f1f5f9;
+      border-radius: 50px;
+    }
+  }
+  
+  .portfolio-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #1a2c41;
+  }
+  
+  .portfolio-description {
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .portfolio-status {
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+    color: #4a5568;
+    font-size: 0.95rem;
+    
+    .status-label {
+      font-weight: 600;
+    }
+  }
+}
