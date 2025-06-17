@@ -1,0 +1,206 @@
+/* src/styles/components/submission.scss */
+
+.submission-section {
+  padding: 5rem 0;
+  background-color: #f7f9fc;
+  
+  .submission-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .submission-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    
+    h2 {
+      font-size: 2.5rem;
+      color: #1a3a5f;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      color: #556677;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+  
+  .submission-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      
+      .form-group {
+        &.full-width {
+          grid-column: span 2;
+        }
+        
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+          color: #1a3a5f;
+        }
+        
+        input, textarea {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          border: 1px solid #dce2e9;
+          border-radius: 4px;
+          font-size: 1rem;
+          transition: border-color 0.3s;
+          
+          &:focus {
+            outline: none;
+            border-color: #2c7be5;
+            box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.1);
+          }
+        }
+        
+        textarea {
+          resize: vertical;
+          min-height: 120px;
+        }
+        
+        .file-upload {
+          position: relative;
+          
+          input[type="file"] {
+            padding: 0.8rem;
+            background-color: #f1f4f9;
+          }
+          
+          .file-hint {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #7d8da3;
+          }
+        }
+      }
+    }
+    
+    .error-message {
+      color: #e63757;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      background-color: #ffe8ed;
+      border-radius: 4px;
+      font-size: 0.95rem;
+    }
+    
+    .form-actions {
+      margin-top: 2.5rem;
+      text-align: center;
+      
+      button {
+        padding: 0.8rem 2.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        background-color: #1a3a5f;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        
+        &:hover {
+          background-color: #12293f;
+        }
+        
+        &:disabled {
+          background-color: #a0aec0;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+  
+  .submission-success {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      background-color: #00b894;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1.5rem;
+    }
+    
+    h3 {
+      color: #1a3a5f;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      color: #556677;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    button {
+      padding: 0.8rem 2rem;
+      background-color: #1a3a5f;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      
+      &:hover {
+        background-color: #12293f;
+      }
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .submission-section {
+    padding: 3rem 0;
+    
+    .submission-container {
+      padding: 0 1rem;
+    }
+    
+    .submission-header {
+      h2 {
+        font-size: 2rem;
+      }
+    }
+    
+    .submission-form, .submission-success {
+      padding: 2rem 1.5rem;
+      
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        
+        .form-group.full-width {
+          grid-column: 1;
+        }
+      }
+    }
+  }
+}

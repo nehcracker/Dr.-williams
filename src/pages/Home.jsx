@@ -7,6 +7,7 @@ import SectorsSection from '../components/sections/SectorsSection';
 import PhilosophySection from '../components/sections/PhilosophySection';
 import PortfolioSection from '../components/sections/PortfolioSection';
 import NetworkSection from '../components/sections/NetworkSection';
+import SubmissionSection from '../components/sections/SubmissionSection';
 
 
 const Home = () => {
@@ -26,6 +27,7 @@ const Home = () => {
       <PhilosophySection />
       <PortfolioSection />
       <NetworkSection />
+      <SubmissionSection />
     </PageWrapper>
   );
 };
