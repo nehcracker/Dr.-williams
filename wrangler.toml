@@ -1,0 +1,12 @@
+name = "dr-williams-financier-website"
+type = "webpack"
+
+account_id = "c8b30bfdfa4ca3387d48ddd8b9b91231" # Add your Cloudflare account ID here
+workers_dev = true
+route = ""
+zone_id = "1dad2cb136b6883eb591c8c309216419"
+
+[build]
+command = "npm run build"
+upload.format = "service-worker"
+upload.dir = "build"
