@@ -75,6 +75,9 @@
     },
     "react-scripts": {
       "@svgr/webpack": "^6.0.0"
+    },
+    "react-helmet-async": {
+      "react": "^19.1.0"
     }
   },
   "devDependencies": {
