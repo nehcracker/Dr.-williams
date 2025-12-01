@@ -16,8 +16,9 @@ const Home = () => {
       <Helmet>
         <title>Dr. Williams | private financier | Financial Investor</title>
         <meta name="description" content="Premier financial consulting and investment services with Dr. 
-        Williams, specializing in strategic investments and project financing." />
-        <meta name="keywords" content="financial consulting, investment services, strategic Investor,  project financing" />
+        Williams, specializing in strategic investments and project & capital financing." />
+        <meta name="keywords" content="financial consulting, Project financing, Debt capital, equity capital financing, Loans, 
+        Working capital, real estate financing, Investment partner, by off, offshore real estate  investment services, strategic Investor,  project financing" />
         <meta property="og:title" content="Dr. Williams | Financial Investor & Financier" />
         <meta property="og:description" content="Premier financial consulting and investment services with Dr. Williams, specializing in strategic investments and project financing." />
       </Helmet>
