@@ -13,7 +13,7 @@ const About = () => {
   return (
     <PageWrapper>
       <Helmet>
-        <title>About Dr. Williams | Private Financier & Financial Expert</title>
+        <title>Dr. Williams | Private Financier & Financial Expert</title>
         <meta name="description" content="Learn about Dr. Williams, a premier private financier offering expert financial consulting, investment services, and strategic project financing solutions." />
         <meta name="keywords" content="about Dr. Williams, private financier, financial expert, investment consulting, project financing" />
         <link rel="canonical" href="https://drwilliamsfinancier.com/about" />
