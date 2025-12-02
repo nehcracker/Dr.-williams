@@ -1,0 +1,696 @@
+// ============================================
+// GLOBAL STYLES - UPDATED
+// Dr. Williams Financier Website
+// ============================================
+
+@import './variables';
+@import './mixins';
+
+// ============================================
+// GOOGLE FONTS IMPORT
+// ============================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant:wght@400;500;600;700&display=swap');
+
+// ============================================
+// CSS RESET & BASE STYLES
+// ============================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  //scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $text-primary;
+  background-color: $bg-primary;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+
+h1, .h1 {
+  @include heading-1;
+  color: $text-primary;
+  margin-bottom: $spacing-6;
+}
+
+h2, .h2 {
+  @include heading-2;
+  color: $text-primary;
+  margin-bottom: $spacing-6;
+}
+
+h3, .h3 {
+  @include heading-3;
+  color: $text-primary;
+  margin-bottom: $spacing-5;
+}
+
+h4, .h4 {
+  @include heading-4;
+  color: $text-primary;
+  margin-bottom: $spacing-5;
+}
+
+h5, .h5 {
+  @include heading-5;
+  color: $text-primary;
+  margin-bottom: $spacing-4;
+}
+
+h6, .h6 {
+  @include heading-6;
+  color: $text-primary;
+  margin-bottom: $spacing-4;
+}
+
+p {
+  margin-bottom: $spacing-5;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+a {
+  color: $primary-600;
+  text-decoration: none;
+  transition: $transition-colors;
+  
+  &:hover {
+    color: $primary-700;
+  }
+  
+  &:focus-visible {
+    @include focus-visible;
+  }
+}
+
+strong, b {
+  font-weight: $font-semibold;
+}
+
+em, i {
+  font-style: italic;
+}
+
+small, .text-small {
+  @include body-small;
+}
+
+.text-large {
+  @include body-large;
+}
+
+// Text Utilities
+.text-gradient {
+  @include gradient-text($gradient-gold);
+}
+
+.text-gradient-primary {
+  @include gradient-text($gradient-primary);
+}
+
+.text-gradient-success {
+  @include gradient-text($gradient-success);
+}
+
+// ============================================
+// LINKS & BUTTONS
+// ============================================
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  
+  &:focus-visible {
+    @include focus-visible;
+  }
+}
+
+// Base button classes
+.btn {
+  @include button-base;
+  
+  &-primary {
+    @include button-primary;
+  }
+  
+  &-gold {
+    @include button-gold;
+  }
+  
+  &-outline {
+    @include button-outline;
+  }
+  
+  &-ghost {
+    @include button-ghost;
+  }
+  
+  // Sizes
+  &-sm {
+    padding: $spacing-3 $spacing-5;
+    font-size: $font-size-sm;
+  }
+  
+  &-lg {
+    padding: $spacing-5 $spacing-9;
+    font-size: $font-size-lg;
+  }
+  
+  &-xl {
+    padding: $spacing-6 $spacing-10;
+    font-size: $font-size-xl;
+  }
+  
+  // Full width
+  &-block {
+    display: flex;
+    width: 100%;
+  }
+}
+
+// ============================================
+// FORM ELEMENTS
+// ============================================
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="search"],
+select,
+textarea {
+  @include input-base;
+}
+
+label {
+  display: block;
+  margin-bottom: $spacing-3;
+  font-weight: $font-medium;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+}
+
+.form-group {
+  margin-bottom: $spacing-6;
+}
+
+.form-error {
+  color: $error;
+  font-size: $font-size-sm;
+  margin-top: $spacing-2;
+}
+
+.form-success {
+  color: $success;
+  font-size: $font-size-sm;
+  margin-top: $spacing-2;
+}
+
+.input-error {
+  @include input-error;
+}
+
+.input-success {
+  @include input-success;
+}
+
+// ============================================
+// LISTS
+// ============================================
+
+ul, ol {
+  margin-bottom: $spacing-5;
+  padding-left: $spacing-7;
+}
+
+li {
+  margin-bottom: $spacing-3;
+}
+
+.list-unstyled {
+  list-style: none;
+  padding-left: 0;
+}
+
+.list-inline {
+  list-style: none;
+  padding-left: 0;
+  
+  li {
+    display: inline-block;
+    margin-right: $spacing-5;
+    margin-bottom: 0;
+  }
+}
+
+// ============================================
+// IMAGES & MEDIA
+// ============================================
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: $font-size-sm;
+  color: $text-muted;
+  margin-top: $spacing-3;
+  text-align: center;
+}
+
+// ============================================
+// CONTAINERS & LAYOUT
+// ============================================
+
+.container {
+  @include container;
+}
+
+.container-sm {
+  @include container($container-sm);
+}
+
+.container-md {
+  @include container($container-md);
+}
+
+.container-lg {
+  @include container($container-lg);
+}
+
+.container-xl {
+  @include container($container-xl);
+}
+
+.container-2xl {
+  @include container($container-2xl);
+}
+
+.container-fluid {
+  width: 100%;
+  padding-left: $spacing-5;
+  padding-right: $spacing-5;
+}
+
+// Section spacing
+.section {
+  padding: $spacing-16 0;
+  
+  @include respond-below(lg) {
+    padding: $spacing-12 0;
+  }
+  
+  @include respond-below(md) {
+    padding: $spacing-10 0;
+  }
+}
+
+.section-sm {
+  padding: $spacing-10 0;
+  
+  @include respond-below(md) {
+    padding: $spacing-9 0;
+  }
+}
+
+.section-lg {
+  padding: $spacing-20 0;
+  
+  @include respond-below(lg) {
+    padding: $spacing-16 0;
+  }
+  
+  @include respond-below(md) {
+    padding: $spacing-12 0;
+  }
+}
+
+// ============================================
+// CARDS
+// ============================================
+
+.card {
+  @include card-base;
+  
+  &-hover {
+    @include card-hover;
+  }
+  
+  &-glass {
+    @include card-glass;
+  }
+  
+  &-premium {
+    @include card-premium;
+  }
+}
+
+// ============================================
+// UTILITY CLASSES
+// ============================================
+
+// Display
+.d-none { display: none !important; }
+.d-block { display: block !important; }
+.d-inline { display: inline !important; }
+.d-inline-block { display: inline-block !important; }
+.d-flex { display: flex !important; }
+.d-inline-flex { display: inline-flex !important; }
+.d-grid { display: grid !important; }
+
+// Flex utilities
+.flex-row { flex-direction: row !important; }
+.flex-column { flex-direction: column !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
+
+.justify-start { justify-content: flex-start !important; }
+.justify-end { justify-content: flex-end !important; }
+.justify-center { justify-content: center !important; }
+.justify-between { justify-content: space-between !important; }
+.justify-around { justify-content: space-around !important; }
+
+.align-start { align-items: flex-start !important; }
+.align-end { align-items: flex-end !important; }
+.align-center { align-items: center !important; }
+.align-stretch { align-items: stretch !important; }
+
+.gap-1 { gap: $spacing-3 !important; }
+.gap-2 { gap: $spacing-5 !important; }
+.gap-3 { gap: $spacing-6 !important; }
+.gap-4 { gap: $spacing-7 !important; }
+.gap-5 { gap: $spacing-9 !important; }
+
+// Text alignment
+.text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+.text-justify { text-align: justify !important; }
+
+// Text transform
+.text-uppercase { text-transform: uppercase !important; }
+.text-lowercase { text-transform: lowercase !important; }
+.text-capitalize { text-transform: capitalize !important; }
+
+// Font weight
+.fw-light { font-weight: $font-light !important; }
+.fw-normal { font-weight: $font-regular !important; }
+.fw-medium { font-weight: $font-medium !important; }
+.fw-semibold { font-weight: $font-semibold !important; }
+.fw-bold { font-weight: $font-bold !important; }
+
+// Text colors
+.text-primary { color: $text-primary !important; }
+.text-secondary { color: $text-secondary !important; }
+.text-muted { color: $text-muted !important; }
+.text-white { color: $text-inverse !important; }
+.text-success { color: $success !important; }
+.text-warning { color: $warning !important; }
+.text-error { color: $error !important; }
+.text-info { color: $info !important; }
+
+// Background colors
+.bg-primary { background-color: $bg-primary !important; }
+.bg-secondary { background-color: $bg-secondary !important; }
+.bg-tertiary { background-color: $bg-tertiary !important; }
+.bg-dark { background-color: $bg-dark !important; }
+.bg-gradient-primary { background: $gradient-primary !important; }
+.bg-gradient-gold { background: $gradient-gold !important; }
+
+// Spacing utilities (margin & padding)
+@each $side in (t, r, b, l) {
+  @each $size, $value in (
+    0: $spacing-0,
+    1: $spacing-3,
+    2: $spacing-5,
+    3: $spacing-6,
+    4: $spacing-7,
+    5: $spacing-9,
+    6: $spacing-10,
+    7: $spacing-12
+  ) {
+    .m#{$side}-#{$size} {
+      @if $side == t { margin-top: $value !important; }
+      @if $side == r { margin-right: $value !important; }
+      @if $side == b { margin-bottom: $value !important; }
+      @if $side == l { margin-left: $value !important; }
+    }
+    
+    .p#{$side}-#{$size} {
+      @if $side == t { padding-top: $value !important; }
+      @if $side == r { padding-right: $value !important; }
+      @if $side == b { padding-bottom: $value !important; }
+      @if $side == l { padding-left: $value !important; }
+    }
+  }
+}
+
+// Border radius
+.rounded-none { border-radius: $radius-none !important; }
+.rounded-sm { border-radius: $radius-sm !important; }
+.rounded { border-radius: $radius-base !important; }
+.rounded-md { border-radius: $radius-md !important; }
+.rounded-lg { border-radius: $radius-lg !important; }
+.rounded-xl { border-radius: $radius-xl !important; }
+.rounded-2xl { border-radius: $radius-2xl !important; }
+.rounded-full { border-radius: $radius-full !important; }
+
+// Shadows
+.shadow-none { box-shadow: none !important; }
+.shadow-sm { box-shadow: $shadow-sm !important; }
+.shadow { box-shadow: $shadow-base !important; }
+.shadow-md { box-shadow: $shadow-md !important; }
+.shadow-lg { box-shadow: $shadow-lg !important; }
+.shadow-xl { box-shadow: $shadow-xl !important; }
+
+// Overflow
+.overflow-hidden { overflow: hidden !important; }
+.overflow-visible { overflow: visible !important; }
+.overflow-scroll { overflow: scroll !important; }
+.overflow-auto { overflow: auto !important; }
+
+// Position
+.position-relative { position: relative !important; }
+.position-absolute { position: absolute !important; }
+.position-fixed { position: fixed !important; }
+
+// Width & Height
+.w-100 { width: 100% !important; }
+.w-auto { width: auto !important; }
+.h-100 { height: 100% !important; }
+.h-auto { height: auto !important; }
+
+// Visibility
+.visible { visibility: visible !important; }
+.invisible { visibility: hidden !important; }
+
+.opacity-0 { opacity: 0 !important; }
+.opacity-50 { opacity: 0.5 !important; }
+.opacity-100 { opacity: 1 !important; }
+
+// Cursor
+.cursor-pointer { cursor: pointer !important; }
+.cursor-default { cursor: default !important; }
+.cursor-not-allowed { cursor: not-allowed !important; }
+
+// User select
+//.select-none { user-select: none !important; }
+//.select-text { user-select: text !important; }
+//.select-all { user-select: all !important; }
+
+// Pointer events
+.pointer-events-none { pointer-events: none !important; }
+.pointer-events-auto { pointer-events: auto !important; }
+
+// ============================================
+// ANIMATION UTILITIES
+// ============================================
+
+.fade-in { @include fade-in; }
+.slide-in-up { @include slide-in-up; }
+.slide-in-left { @include slide-in-left; }
+.slide-in-right { @include slide-in-right; }
+.scale-in { @include scale-in; }
+.float { @include float; }
+.pulse { @include pulse; }
+
+// ============================================
+// RESPONSIVE UTILITIES
+// ============================================
+
+@include respond-below(md) {
+  .d-md-none { display: none !important; }
+  .d-md-block { display: block !important; }
+  .d-md-flex { display: flex !important; }
+}
+
+@include respond-to(md) {
+  .d-md-show { display: block !important; }
+}
+
+@include respond-below(lg) {
+  .d-lg-none { display: none !important; }
+  .d-lg-block { display: block !important; }
+  .d-lg-flex { display: flex !important; }
+}
+
+@include respond-to(lg) {
+  .d-lg-show { display: block !important; }
+}
+
+// ============================================
+// ACCESSIBILITY
+// ============================================
+
+.sr-only {
+  @include visually-hidden;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: $primary-700;
+  color: $text-inverse;
+  padding: $spacing-3 $spacing-5;
+  text-decoration: none;
+  z-index: 100;
+  
+  &:focus {
+    top: 0;
+  }
+}
+
+// Focus styles
+:focus-visible {
+  outline: 2px solid $primary-500;
+  outline-offset: 2px;
+}
+
+// ============================================
+// SCROLLBAR CUSTOMIZATION
+// ============================================
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary-400;
+  border-radius: $radius-full;
+  
+  &:hover {
+    background: $primary-500;
+  }
+}
+
+// ============================================
+// SELECTION
+// ============================================
+
+::selection {
+  background-color: $gold-main;
+  color: $primary-900;
+}
+
+::-moz-selection {
+  background-color: $gold-main;
+  color: $primary-900;
+}
+
+// ============================================
+// PRINT STYLES
+// ============================================
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+  
+  abbr[title]::after {
+    content: " (" attr(title) ")";
+  }
+  
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  
+  thead {
+    display: table-header-group;
+  }
+  
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  
+  img {
+    max-width: 100% !important;
+  }
+  //p,
+  //h2,
+  //h3 {
+    //orphans: 3;
+    //widows: 3;
+  //}
+ 
+  
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}

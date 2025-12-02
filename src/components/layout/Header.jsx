@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './Header.css'; // Import the CSS file
+import './Header.scss'; // Import the CSS file
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);

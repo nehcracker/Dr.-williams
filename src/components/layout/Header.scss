@@ -1,15 +1,15 @@
+@import '../../styles/foundation/variables';
+@import '../../styles/foundation/mixins';
+
 /* Header Styles */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  transition: all 0.3s ease;
+  @include glassmorphism(0.95, 10px, 0.1);
+  z-index: $z-index-fixed;
+  transition: $transition-all;
 }
 
 .header.scrolled {
@@ -18,9 +18,7 @@
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  @include container($container-xl);
 }
 
 .header-content {
@@ -43,16 +41,16 @@
 }
 
 .logo h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #2c3e50;
+  font-size: $font-size-2xl;
+  font-weight: $font-bold;
+  color: $text-primary;
   margin: 0;
-  letter-spacing: -0.5px;
-  transition: all 0.3s ease;
+  letter-spacing: $letter-spacing-tight;
+  transition: $transition-all;
 }
 
 .logo:hover h1 {
-  color: #3498db;
+  color: $accent-500;
   transform: scale(1.05);
 }
 
@@ -110,12 +108,12 @@
 
 .nav-menu a {
   text-decoration: none;
-  color: #2c3e50;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  transition: all 0.3s ease;
+  color: $text-primary;
+  font-weight: $font-medium;
+  font-size: $font-size-base;
+  padding: $spacing-3 $spacing-5;
+  border-radius: $radius-2xl;
+  transition: $transition-all;
   position: relative;
   overflow: hidden;
 }
@@ -341,9 +339,9 @@
 }
 
 /* Smooth scrolling for anchor links */
-html {
-  scroll-behavior: smooth;
-}
+//html {
+//  scroll-behavior: smooth;
+//}
 
 /* Body padding to account for fixed header */
 body {

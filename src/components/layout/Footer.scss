@@ -1,26 +1,5 @@
-.nav-menu a.active {
-  color: #3498db;
-  background: rgba(52, 152, 219, 0.15);
-  font-weight: 600;
-}
-
-.menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  opacity: 0;
-  animation: fadeIn 0.3s ease forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
+@import '../../styles/foundation/variables';
+@import '../../styles/foundation/mixins';
 
 /* Footer Styles */
 .footer {
@@ -74,9 +53,9 @@
 }
 
 .footer-tagline {
-  color: #6c757d;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
+  color: $text-secondary;
+  font-size: $font-size-sm;
+  margin-bottom: $spacing-8;
   opacity: 0;
   animation: fadeInUp 0.8s ease 0.2s forwards;
 }
@@ -92,12 +71,12 @@
 }
 
 .footer-link {
-  color: #6c757d;
+  color: $text-secondary;
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+  font-size: $font-size-sm;
+  transition: $transition-all;
   position: relative;
-  padding: 0.5rem 0;
+  padding: $spacing-3 0;
 }
 
 .footer-link::after {
@@ -107,13 +86,13 @@
   left: 50%;
   width: 0;
   height: 1px;
-  background: #3498db;
-  transition: all 0.3s ease;
+  background: $accent-500;
+  transition: $transition-all;
   transform: translateX(-50%);
 }
 
 .footer-link:hover {
-  color: #3498db;
+  color: $accent-500;
   transform: translateY(-2px);
 }
 

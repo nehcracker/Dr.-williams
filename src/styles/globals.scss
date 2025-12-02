@@ -12,6 +12,28 @@
 @use './components/contact.scss';
 @use './components/submission.scss';
 
+// ============================================
+// MAIN STYLES ENTRY POINT
+// ============================================
+
+// Foundation
+@import './foundation/variables';
+@import './foundation/mixins';
+@import './foundation/globals';
+@import './foundation/components';
+
+// Legacy component styles (will be migrated in Phase 2)
+@import './components/header';
+@import './components/footer';
+@import './components/hero';
+@import './components/about';
+@import './components/sectors';
+@import './components/portfolio';
+@import './components/philosophy';
+@import './components/network';
+@import './components/contact';
+@import './components/submission';
+
 /* Global CSS Variables */
 :root {
   --primary-color: #2c3e50;
