@@ -1,112 +1,850 @@
+// ============================================
+// SECTORS SECTION - UPGRADED STYLES
+// ============================================
+
+@import '../../styles/foundation/variables';
+@import '../../styles/foundation/mixins';
+
 .sectors-section {
-  padding: 6rem 0;
-  background-color: #fff;
+  position: relative;
+  padding: $spacing-20 0;
+  background: $bg-primary;
+  overflow: hidden;
   
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+  @include respond-below(lg) {
+    padding: $spacing-16 0;
   }
   
-  .section-title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 3rem;
-    text-align: center;
-    color: #1a2c41;
+  @include respond-below(md) {
+    padding: $spacing-12 0;
+  }
+}
+
+.sectors-container {
+  @include container($container-2xl);
+  position: relative;
+  z-index: 1;
+}
+
+// ============================================
+// BACKGROUND DECORATIONS
+// ============================================
+
+.sectors-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.decoration-blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.05;
+  filter: blur(60px);
+  
+  &-1 {
+    width: 500px;
+    height: 500px;
+    top: 10%;
+    right: -10%;
+    background: $gradient-gold;
+    animation: blobFloat 20s ease-in-out infinite;
+  }
+  
+  &-2 {
+    width: 400px;
+    height: 400px;
+    bottom: 20%;
+    left: -5%;
+    background: $gradient-primary;
+    animation: blobFloat 25s ease-in-out infinite reverse;
+  }
+}
+
+@keyframes blobFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+}
+
+// ============================================
+// HEADER
+// ============================================
+
+.sectors-header {
+  text-align: center;
+  margin-bottom: $spacing-12;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sectors-badge {
+  display: inline-block;
+  padding: $spacing-2 $spacing-5;
+  background: linear-gradient(
+    135deg,
+    rgba($accent-600, 0.1),
+    rgba($primary-600, 0.1)
+  );
+  border: 1px solid rgba($accent-600, 0.2);
+  border-radius: $radius-full;
+  color: $accent-700;
+  font-size: $font-size-sm;
+  font-weight: $font-semibold;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+  margin-bottom: $spacing-6;
+}
+
+.sectors-title {
+  @include heading-2;
+  margin-bottom: $spacing-5;
+  
+  .gradient-text {
+    @include gradient-text($gradient-success);
+  }
+}
+
+.sectors-subtitle {
+  @include body-large;
+  color: $text-secondary;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: $line-height-relaxed;
+}
+
+// ============================================
+// TABS NAVIGATION
+// ============================================
+
+.sectors-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-5;
+  margin-bottom: $spacing-10;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s $ease-out 0.2s;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @include respond-below(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include respond-below(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tab-button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-3;
+  padding: $spacing-6 $spacing-5;
+  background: $bg-primary;
+  border: 2px solid $border-light;
+  border-radius: $radius-xl;
+  cursor: pointer;
+  transition: $transition-all;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  
+  .sectors-tabs.visible & {
+    animation: fadeInUp 0.6s $ease-out forwards;
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    background: var(--sector-color, $primary-600);
+    opacity: 0.1;
+    transition: height 0.3s $ease-out;
+  }
+  
+  &:hover {
+    border-color: var(--sector-color, $primary-500);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    
+    &::before {
+      height: 100%;
+    }
+    
+    .tab-icon {
+      transform: scale(1.2);
+    }
+  }
+  
+  &.active {
+    border-color: var(--sector-color, $primary-600);
+    background: linear-gradient(
+      135deg,
+      rgba(var(--sector-color, 59, 130, 246), 0.05),
+      rgba(var(--sector-color, 59, 130, 246), 0.1)
+    );
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    
+    .tab-icon {
+      transform: scale(1.1);
+    }
+    
+    .tab-indicator {
+      width: 100%;
+    }
+  }
+}
+
+.tab-icon {
+  font-size: $font-size-3xl;
+  transition: transform $duration-base $ease-out;
+}
+
+.tab-title {
+  font-size: $font-size-base;
+  font-weight: $font-semibold;
+  color: $text-primary;
+}
+
+.tab-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--sector-color, $primary-600);
+  transition: width 0.3s $ease-out;
+}
+
+// ============================================
+// CONTENT AREA
+// ============================================
+
+.sectors-content {
+  margin-bottom: $spacing-12;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: $spacing-10;
+  animation: fadeIn 0.5s $ease-out;
+  
+  @include respond-below(lg) {
+    grid-template-columns: 1fr;
+    gap: $spacing-8;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// ============================================
+// SECTOR MAIN INFO
+// ============================================
+
+.sector-main {
+  background: $bg-primary;
+  border: 1px solid $border-light;
+  border-radius: $radius-2xl;
+  padding: $spacing-8;
+  
+  @include respond-below(md) {
+    padding: $spacing-6;
+  }
+}
+
+.sector-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-5;
+  margin-bottom: $spacing-6;
+}
+
+.sector-icon-large {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  font-size: $font-size-4xl;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--sector-color, 59, 130, 246), 0.1),
+    rgba(var(--sector-color, 59, 130, 246), 0.2)
+  );
+  border-radius: $radius-xl;
+  border: 2px solid var(--sector-color, $primary-500);
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(var(--sector-color, 59, 130, 246), 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(var(--sector-color, 59, 130, 246), 0);
+  }
+}
+
+.sector-info {
+  flex: 1;
+}
+
+.sector-title {
+  @include heading-3;
+  margin-bottom: $spacing-2;
+  
+  @include respond-below(md) {
+    font-size: $font-size-xl;
+  }
+}
+
+.sector-tagline {
+  font-size: $font-size-base;
+  color: $text-muted;
+  font-weight: $font-medium;
+}
+
+.sector-description {
+  @include body-base;
+  color: $text-secondary;
+  line-height: $line-height-relaxed;
+  margin-bottom: $spacing-7;
+}
+
+// ============================================
+// SECTOR STATS
+// ============================================
+
+.sector-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-5;
+  margin-bottom: $spacing-6;
+}
+
+.stat-box {
+  background: $bg-secondary;
+  border-radius: $radius-lg;
+  padding: $spacing-5;
+  border: 1px solid $border-light;
+  transition: $transition-all;
+  
+  &:hover {
+    border-color: $primary-300;
+    transform: translateY(-2px);
+  }
+}
+
+.stat-label {
+  font-size: $font-size-xs;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+  margin-bottom: $spacing-2;
+}
+
+.stat-value {
+  font-size: $font-size-lg;
+  font-weight: $font-bold;
+  color: $text-primary;
+}
+
+// ============================================
+// SECTOR HIGHLIGHT
+// ============================================
+
+.sector-highlight {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  padding: $spacing-4 $spacing-5;
+  background: linear-gradient(
+    135deg,
+    rgba($gold-main, 0.1),
+    rgba($gold-light, 0.05)
+  );
+  border: 1px solid rgba($gold-main, 0.2);
+  border-radius: $radius-lg;
+}
+
+.highlight-icon {
+  color: $gold-main;
+  font-size: $font-size-lg;
+  animation: highlightPulse 2s ease-in-out infinite;
+}
+
+@keyframes highlightPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+.highlight-text {
+  font-size: $font-size-sm;
+  font-weight: $font-semibold;
+  color: $text-primary;
+}
+
+// ============================================
+// SERVICES GRID
+// ============================================
+
+.sector-services {
+  background: $bg-secondary;
+  border-radius: $radius-2xl;
+  padding: $spacing-8;
+  border: 1px solid $border-light;
+  
+  @include respond-below(md) {
+    padding: $spacing-6;
+  }
+}
+
+.services-title {
+  @include heading-4;
+  margin-bottom: $spacing-7;
+  text-align: center;
+  
+  @include respond-below(md) {
+    font-size: $font-size-lg;
+  }
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-5;
+  
+  @include respond-below(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.service-card {
+  position: relative;
+  background: $bg-primary;
+  border: 1px solid $border-light;
+  border-radius: $radius-xl;
+  padding: $spacing-6;
+  transition: $transition-all;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideInUp 0.6s $ease-out forwards;
+  
+  &:hover {
+    border-color: var(--service-color, $primary-500);
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+    
+    .service-accent {
+      width: 100%;
+    }
+    
+    .service-dot {
+      background: var(--service-color, $primary-500);
+      transform: scale(1.5);
+    }
+  }
+}
+
+.service-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-4;
+}
+
+.service-number {
+  font-family: $font-heading;
+  font-size: $font-size-3xl;
+  font-weight: $font-bold;
+  color: $text-muted;
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.service-dot {
+  width: 8px;
+  height: 8px;
+  background: $border-medium;
+  border-radius: $radius-full;
+  transition: $transition-all;
+}
+
+.service-name {
+  font-size: $font-size-base;
+  font-weight: $font-semibold;
+  color: $text-primary;
+  margin-bottom: $spacing-3;
+  line-height: $line-height-snug;
+}
+
+.service-detail {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  line-height: $line-height-relaxed;
+  margin-bottom: 0;
+}
+
+.service-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--service-color, $primary-500);
+  transition: width 0.3s $ease-out;
+}
+
+// ============================================
+// COMPARISON TABLE
+// ============================================
+
+.sectors-comparison {
+  margin-bottom: $spacing-12;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out 0.6s;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.comparison-title {
+  @include heading-3;
+  text-align: center;
+  margin-bottom: $spacing-7;
+}
+
+.comparison-table {
+  background: $bg-primary;
+  border: 1px solid $border-light;
+  border-radius: $radius-2xl;
+  overflow: hidden;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  background: $bg-secondary;
+  border-bottom: 2px solid $border-medium;
+  
+  @include respond-below(md) {
+    display: none;
+  }
+  
+  .table-cell {
+    padding: $spacing-5 $spacing-6;
+    font-weight: $font-semibold;
+    font-size: $font-size-sm;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wide;
+    color: $text-secondary;
+  }
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  border-bottom: 1px solid $border-light;
+  cursor: pointer;
+  transition: $transition-all;
+  
+  @include respond-below(md) {
+    grid-template-columns: 1fr;
+    gap: $spacing-3;
+    padding: $spacing-5 $spacing-6;
+  }
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:hover {
+    background: $bg-secondary;
+  }
+  
+  &.active {
+    background: linear-gradient(
+      90deg,
+      rgba($primary-600, 0.05),
+      rgba($primary-600, 0.02)
+    );
+    border-left: 4px solid $primary-600;
+  }
+  
+  .table-cell {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    padding: $spacing-5 $spacing-6;
+    
+    @include respond-below(md) {
+      padding: $spacing-2 0;
+      
+      &::before {
+        content: attr(data-label);
+        font-weight: $font-semibold;
+        color: $text-muted;
+        font-size: $font-size-xs;
+        text-transform: uppercase;
+        min-width: 100px;
+      }
+    }
+  }
+}
+
+.cell-icon {
+  font-size: $font-size-xl;
+}
+
+.cell-text {
+  font-size: $font-size-base;
+  color: $text-primary;
+}
+
+// ============================================
+// CTA SECTION
+// ============================================
+
+.sectors-cta {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out 0.8s;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cta-content {
+  background: $gradient-primary;
+  border-radius: $radius-3xl;
+  padding: $spacing-10 $spacing-9;
+  color: $text-inverse;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 70%
+    );
+    animation: ctaGlow 8s ease-in-out infinite;
+  }
+  
+  @include respond-below(md) {
+    padding: $spacing-8 $spacing-6;
+  }
+}
+
+@keyframes ctaGlow {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-20%, 20%);
+  }
+}
+
+.cta-title {
+  @include heading-3;
+  margin-bottom: $spacing-4;
+  position: relative;
+  z-index: 1;
+  color: $gold-main;
+  
+  @include respond-below(md) {
+    font-size: $font-size-xl;
+  }
+}
+
+.cta-description {
+  @include body-large;
+  margin-bottom: $spacing-7;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.95;
+  position: relative;
+  z-index: 1;
+  
+  @include respond-below(md) {
+    font-size: $font-size-base;
+  }
+}
+
+.cta-button {
+  @include button-base;
+  background: $gradient-gold;
+  color: $primary-900;
+  padding: $spacing-5 $spacing-9;
+  font-size: $font-size-lg;
+  box-shadow: 0 10px 30px rgba($gold-main, 0.3);
+  position: relative;
+  z-index: 1;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba($gold-main, 0.4);
+  }
+  
+  .btn-arrow {
+    margin-left: $spacing-3;
+    transition: transform $duration-base $ease-out;
+  }
+  
+  &:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+  
+  .btn-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+  }
+  
+  &:hover .btn-shine {
+    animation: btnShine 0.8s ease-out;
+  }
+}
+
+@keyframes btnShine {
+  to {
+    left: 100%;
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// REDUCED MOTION
+// ============================================
+
+@media (prefers-reduced-motion: reduce) {
+  .decoration-blob,
+  .sector-icon-large,
+  .highlight-icon,
+  .cta-content::before {
+    animation: none;
+  }
+  
+  .sectors-header,
+  .sectors-tabs,
+  .sectors-comparison,
+  .sectors-cta,
+  .service-card {
+    transition-duration: 0.01ms;
+    animation: none;
+  }
+}
+
+// ============================================
+// PRINT STYLES
+// ============================================
+
+@media print {
+  .sectors-decoration {
+    display: none;
+  }
+  
+  .sectors-section {
+    padding: $spacing-7 0;
   }
   
   .sectors-tabs {
-    display: flex;
-    gap: 3rem;
-    
-    @media (max-width: 992px) {
-      flex-direction: column;
-    }
+    display: none;
   }
   
-  .tabs-navigation {
-    flex: 0 0 25%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    
-    @media (max-width: 992px) {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    
-    .tab-button {
-      padding: 1.25rem 1.5rem;
-      background: none;
-      border: none;
-      text-align: left;
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: #4a5568;
-      border-left: 3px solid transparent;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      
-      &.active {
-        color: #1a2c41;
-        border-left-color: #1a2c41;
-        background-color: rgba(26, 44, 65, 0.05);
-      }
-      
-      &:hover:not(.active) {
-        background-color: rgba(26, 44, 65, 0.02);
-      }
-      
-      @media (max-width: 992px) {
-        border-left: none;
-        border-bottom: 3px solid transparent;
-        text-align: center;
-        
-        &.active {
-          border-left-color: transparent;
-          border-bottom-color: #1a2c41;
-        }
-      }
-    }
+  .content-wrapper {
+    grid-template-columns: 1fr;
   }
   
-  .tab-content {
-    flex: 1;
-    padding: 2rem;
-    background-color: rgba(26, 44, 65, 0.02);
-    border-radius: 4px;
-    
-    .tab-title {
-      font-size: 1.75rem;
-      margin-bottom: 2rem;
-      color: #1a2c41;
-    }
-    
-    .sector-items {
-      list-style: none;
-      padding: 0;
-      
-      .sector-item {
-        padding: 0.75rem 0;
-        font-size: 1.1rem;
-        color: #4a5568;
-        position: relative;
-        padding-left: 1.5rem;
-        
-        &:before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 8px;
-          height: 8px;
-          background-color: #1a2c41;
-          border-radius: 50%;
-        }
-      }
-    }
+  .sectors-cta {
+    display: none;
   }
 }
