@@ -1,98 +1,928 @@
+// ============================================
+// PHILOSOPHY SECTION - UPGRADED STYLES
+// ============================================
+
+@import '../../styles/foundation/variables';
+@import '../../styles/foundation/mixins';
+
 .philosophy-section {
-  padding: 6rem 0;
-  background-color: #1a2c41;
-  color: #fff;
+  position: relative;
+  padding: $spacing-20 0;
+  background: linear-gradient(
+    180deg,
+    $primary-900 0%,
+    $primary-800 50%,
+    $primary-900 100%
+  );
+  color: $text-inverse;
+  overflow: hidden;
   
-  .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 2rem;
+  @include respond-below(lg) {
+    padding: $spacing-16 0;
   }
   
-  .section-title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 3rem;
-    text-align: center;
-    color : #fff;
+  @include respond-below(md) {
+    padding: $spacing-12 0;
+  }
+}
+
+.philosophy-container {
+  @include container($container-2xl);
+  position: relative;
+  z-index: 1;
+}
+
+// ============================================
+// BACKGROUND
+// ============================================
+
+.philosophy-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-gradient-1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba($accent-500, 0.08) 0%,
+    transparent 70%
+  );
+  animation: gradientFloat 20s ease-in-out infinite;
+}
+
+.bg-gradient-2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba($gold-main, 0.06) 0%,
+    transparent 70%
+  );
+  animation: gradientFloat 25s ease-in-out infinite reverse;
+}
+
+.bg-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.5;
+}
+
+@keyframes gradientFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -20px) scale(1.1);
+  }
+}
+
+// ============================================
+// HEADER
+// ============================================
+
+.philosophy-header {
+  text-align: center;
+  margin-bottom: $spacing-14;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.philosophy-badge {
+  display: inline-block;
+  padding: $spacing-2 $spacing-5;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: $radius-full;
+  color: $gold-light;
+  font-size: $font-size-sm;
+  font-weight: $font-semibold;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+  margin-bottom: $spacing-6;
+}
+
+.philosophy-title {
+  @include heading-2;
+  margin-bottom: $spacing-6;
+  color: $text-inverse;
+  
+  .gradient-text {
+    @include gradient-text($gradient-gold);
+  }
+}
+
+.philosophy-subtitle {
+  @include body-large;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: justify;
+  line-height: $line-height-relaxed;
+}
+
+// ============================================
+// PILLARS SECTION
+// ============================================
+
+.pillars-section {
+  margin-bottom: $spacing-14;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out 0.2s;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pillars-title {
+  @include heading-3;
+  text-align: center;
+  margin-bottom: $spacing-10;
+  color: $text-inverse;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: $spacing-6;
+  
+  @include respond-below(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pillar-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-2xl;
+  padding: $spacing-7;
+  transition: $transition-all;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  
+  .pillars-section.visible & {
+    animation: fadeInUp 0.8s $ease-out forwards;
   }
   
-  .philosophy-content {
-    max-width: 800px;
-    margin: 0 auto;
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+      135deg,
+      var(--pillar-color),
+      transparent
+    );
+    opacity: 0;
+    border-radius: $radius-2xl;
+    transition: opacity 0.3s $ease-out;
+    z-index: 0;
   }
   
-  .philosophy-narrative {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    margin-bottom: 2.5rem;
-    opacity: 0.9;
-  }
-  
-  .philosophy-quote {
-    font-size: 1.75rem;
-    line-height: 1.4;
-    font-style: italic;
-    margin: 3rem 0;
-    padding: 0 2rem;
-    position: relative;
-    text-align: center;
+  &:hover,
+  &.active {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: var(--pillar-color);
     
-    &:before, &:after {
-      content: '"';
-      font-size: 4rem;
-      position: absolute;
+    &::before {
       opacity: 0.2;
     }
     
-    &:before {
-      top: -1rem;
-      left: 0;
+    .pillar-icon {
+      transform: scale(1.2);
+      background: var(--pillar-color);
     }
     
-    &:after {
-      bottom: -2rem;
-      right: 0;
-    }
-    
-    .quote-attribution {
-      display: block;
-      font-size: 1rem;
-      margin-top: 1rem;
-      font-style: normal;
-      opacity: 0.8;
+    .pillar-accent {
+      height: 100%;
     }
   }
   
-  .philosophy-pillars {
-    margin-top: 3rem;
+  @include respond-below(md) {
+    padding: $spacing-6;
+  }
+}
+
+.pillar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-6;
+  position: relative;
+  z-index: 1;
+}
+
+.pillar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  font-size: $font-size-2xl;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: $radius-xl;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: $transition-all;
+}
+
+.pillar-number {
+  font-family: $font-heading;
+  font-size: $font-size-3xl;
+  font-weight: $font-bold;
+  color: rgba(255, 255, 255, 0.2);
+  line-height: 1;
+}
+
+.pillar-content {
+  position: relative;
+  z-index: 1;
+}
+
+.pillar-title {
+  font-family: $font-heading;
+  font-size: $font-size-xl;
+  font-weight: $font-semibold;
+  margin-bottom: $spacing-2;
+  color: $text-inverse;
+}
+
+.pillar-subtitle {
+  font-size: $font-size-sm;
+  color: var(--pillar-color);
+  font-weight: $font-semibold;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+  margin-bottom: $spacing-4;
+}
+
+.pillar-description {
+  @include body-base;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: $line-height-relaxed;
+  margin-bottom: $spacing-5;
+  text-align: justify;
+}
+
+.pillar-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-3;
+}
+
+.benefit-bullet {
+  color: var(--pillar-color);
+  font-size: $font-size-lg;
+  line-height: 1;
+}
+
+.benefit-text {
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: $line-height-relaxed;
+}
+
+.pillar-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: var(--pillar-color);
+  opacity: 0.1;
+  transition: height 0.3s $ease-out;
+  z-index: 0;
+}
+
+// ============================================
+// CORE VALUES
+// ============================================
+
+.values-section {
+  margin-bottom: $spacing-14;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out 0.4s;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.values-title {
+  @include heading-3;
+  text-align: center;
+  margin-bottom: $spacing-10;
+  color: $text-inverse;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-6;
+}
+
+.value-card {
+  text-align: center;
+  padding: $spacing-7;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-xl;
+  transition: $transition-all;
+  opacity: 0;
+  transform: translateY(20px);
+  
+  .values-section.visible & {
+    animation: fadeInUp 0.6s $ease-out forwards;
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
     
-    .pillars-title {
-      font-size: 1.25rem;
-      margin-bottom: 1.5rem;
-      font-weight: 500;
+    .value-icon {
+      transform: scale(1.1);
     }
+  }
+}
+
+.value-icon {
+  font-size: $font-size-4xl;
+  margin-bottom: $spacing-4;
+  display: block;
+  transition: transform $duration-base $ease-out;
+}
+
+.value-title {
+  font-size: $font-size-lg;
+  font-weight: $font-semibold;
+  margin-bottom: $spacing-3;
+  color: $gold-light;
+}
+
+.value-description {
+  font-size: $font-size-base;
+  text-align: justify;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: $line-height-relaxed;
+  margin-bottom: 0;
+}
+
+// ============================================
+// PHILOSOPHY QUOTE
+// ============================================
+
+.philosophy-quote-section {
+  margin-bottom: $spacing-14;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out 0.6s;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.quote-container {
+    grid-template-columns: 1fr 200px;
+    gap: 4rem;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+    justify-items: center;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: $gradient-gold;
+  }
+  
+  @include respond-below(md) {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: $spacing-8;
+  }
+}
+
+.quote-decoration {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  margin-bottom: $spacing-6;
+  
+  @include respond-below(md) {
+    justify-content: center;
+  }
+}
+
+.decoration-line {
+  width: 40px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.decoration-circle {
+  width: 8px;
+  height: 8px;
+  background: $gold-light;
+  border-radius: $radius-full;
+  @include pulse;
+}
+
+.main-quote {
+  position: relative;
+  margin: 0;
+}
+
+.quote-mark {
+  font-family: $font-heading;
+  font-size: 120px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: -40px;
+  left: -20px;
+  
+  @include respond-below(md) {
+    font-size: 80px;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.quote-text {
+  font-family: $font-heading;
+  text-align: justify;
+  font-size: $font-size-2xl;
+  font-style: italic;
+  font-weight: $font-medium;
+  line-height: $line-height-relaxed;
+  margin-bottom: $spacing-6;
+  position: relative;
+  z-index: 1;
+  
+  @include respond-below(md) {
+    font-size: $font-size-xl;
+  }
+}
+
+.quote-attribution {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+  
+  @include respond-below(md) {
+    align-items: center;
+  }
+}
+
+.attribution-dash {
+  width: 50px;
+  height: 2px;
+  background: $gold-light;
+}
+
+.attribution-name {
+  font-size: $font-size-lg;
+  font-weight: $font-semibold;
+  color: $gold-light;
+}
+
+.attribution-title {
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+// Quote Visual
+.quote-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  @include respond-below(md) {
+    margin-top: $spacing-8;
+  }
+}
+
+.visual-circle {
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-full;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  animation: circlePulse 3s ease-in-out infinite;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid rgba($gold-main, 0.3);
+    border-radius: $radius-full;
+    animation: circleRipple 3s ease-out infinite;
+  }
+}
+
+.circle-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.circle-text {
+  font-family: $font-heading;
+  font-size: $font-size-4xl;
+  font-weight: $font-bold;
+  @include gradient-text($gradient-gold);
+  line-height: 1;
+  margin-bottom: $spacing-2;
+}
+
+.circle-label {
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+}
+
+.visual-lines {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  z-index: 1;
+}
+
+.line {
+  position: absolute;
+  background: rgba($gold-main, 0.2);
+  animation: lineRotate 20s linear infinite;
+  
+  &-1 {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+    left: 0;
+  }
+  
+  &-2 {
+    width: 1px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    animation-delay: -6.66s;
+  }
+  
+  &-3 {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+    left: 0;
+    transform: rotate(45deg);
+    animation-delay: -13.33s;
+  }
+}
+
+@keyframes circlePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes circleRipple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes lineRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ============================================
+// APPROACH TIMELINE
+// ============================================
+
+.approach-section {
+ // margin-bottom: $spacing-14;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out 0.8s;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.approach-title {
+  @include heading-3;
+  text-align: center;
+  margin-bottom: $spacing-10;
+  color: $text-inverse;
+}
+
+.approach-timeline {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-3;
+  
+  @include respond-below(lg) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.philosophy-section {
+  .timeline-item {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $radius-xl;
+    padding: $spacing-7;
+    transition: $transition-all;
     
-    .pillars-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      list-style: none;
-      padding: 0;
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-4px);
       
-      .pillar-item {
-        flex: 1 0 40%;
-        background-color: rgba(255, 255, 255, 0.1);
-        padding: 1.25rem;
-        border-radius: 4px;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-        
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.15);
-          transform: translateY(-3px);
-        }
+      .timeline-number {
+        background: $gradient-gold;
+        color: $primary-900;
+        transform: scale(1.1);
       }
     }
+    
+    @include respond-below(lg) {
+      width: 100%;
+    }
+  }
+
+  .timeline-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-family: $font-heading;
+    font-size: $font-size-xl;
+    font-weight: $font-bold;
+    background: rgba(255, 255, 255, 0.1);
+    color: $gold-light;
+    border-radius: $radius-full;
+    margin-bottom: $spacing-5;
+    transition: $transition-all;
+  }
+
+  .timeline-title {
+    font-size: $font-size-lg;
+    font-weight: $font-semibold;
+    margin-bottom: $spacing-3;
+    color: $text-inverse;
+  }
+
+  .timeline-description {
+    font-size: $font-size-sm;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: $line-height-relaxed;
+    margin-bottom: 0;
+  }
+
+  .timeline-connector {
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.1)
+    );
+    margin-top: $spacing-10;
+    flex-shrink: 0;
+    
+    @include respond-below(lg) {
+      width: 2px;
+      height: 40px;
+      margin: 0 auto;
+    }
+  }
+}
+
+// ============================================
+// STATS BAR
+// ============================================
+
+.philosophy-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-2xl;
+  padding: $spacing-8;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out 1s;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @include respond-below(md) {
+    flex-direction: column;
+    gap: $spacing-6;
+  }
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+  text-align: left;
+  
+  @include respond-below(md) {
+    width: 100%;
+  }
+}
+
+.stat-icon {
+  font-size: $font-size-2xl;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-family: $font-heading;
+  font-size: $font-size-2xl;
+  font-weight: $font-bold;
+  @include gradient-text($gradient-gold);
+  line-height: 1;
+  margin-bottom: $spacing-2;
+}
+
+.stat-label {
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.stat-divider {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  
+  @include respond-below(md) {
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// REDUCED MOTION
+// ============================================
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-gradient-1,
+  .bg-gradient-2,
+  .decoration-circle,
+  .visual-circle,
+  .line {
+    animation: none;
+  }
+  
+  .philosophy-header,
+  .pillars-section,
+  .values-section,
+  .philosophy-quote-section,
+  .approach-section,
+  .philosophy-stats,
+  .pillar-card,
+  .value-card {
+    transition-duration: 0.01ms;
+    animation: none;
+  }
+}
+
+// ============================================
+// PRINT STYLES
+// ============================================
+
+@media print {
+  .philosophy-background {
+    display: none;
+  }
+  
+  .philosophy-section {
+    padding: $spacing-7 0;
+    background: white;
+    color: black;
+  }
+  
+  .pillars-grid,
+  .values-grid,
+  .approach-timeline {
+    page-break-inside: avoid;
   }
 }
