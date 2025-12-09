@@ -889,6 +889,49 @@
 }
 
 // ============================================
+// LOADING OVERLAY
+// ============================================
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($bg-primary, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: $radius-2xl;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba($primary-300, 0.3);
+  border-top: 4px solid $primary-600;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: $spacing-4;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-overlay h3 {
+  color: $text-primary;
+  font-size: $font-size-lg;
+  font-weight: $font-semibold;
+  margin: 0;
+}
+
+// ============================================
 // PRINT STYLES
 // ============================================
 
@@ -898,11 +941,11 @@
   .network-cta {
     display: none;
   }
-  
+
   .network-section {
     padding: $spacing-7 0;
   }
-  
+
   .region-details,
   .compliance-section {
     page-break-inside: avoid;

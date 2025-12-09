@@ -3,6 +3,7 @@ import './PhilosophySection.scss';
 
 const PhilosophySection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [activePillar, setActivePillar] = useState(null);
   const sectionRef = useRef(null);
 
@@ -11,6 +12,7 @@ const PhilosophySection = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          setLoading(false);
         }
       },
       { threshold: 0.2 }
@@ -136,6 +138,12 @@ const PhilosophySection = () => {
 
   return (
     <section className="philosophy-section" id="philosophy" ref={sectionRef}>
+      {loading && (
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+          <p>Loading Philosophy...</p>
+        </div>
+      )}
       <div className="philosophy-container">
         {/* Header */}
         <div className={`philosophy-header ${isVisible ? 'visible' : ''}`}>
