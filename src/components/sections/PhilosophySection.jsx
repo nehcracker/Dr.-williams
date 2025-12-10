@@ -2,32 +2,61 @@ import React, { useState, useEffect, useRef } from 'react';
 import './PhilosophySection.scss';
 
 const PhilosophySection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [activePillar, setActivePillar] = useState(null);
+  const [visibleSections, setVisibleSections] = useState({
+    header: true,
+    pillars: true,
+    values: true,
+    quote: true,
+    approach: true,
+    stats: true
+  });
+  
   const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const pillarsRef = useRef(null);
+  const valuesRef = useRef(null);
+  const quoteRef = useRef(null);
+  const approachRef = useRef(null);
+  const statsRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
-          setLoading(false);
+          const refName = entry.target.dataset.section;
+          setVisibleSections(prev => ({ ...prev, [refName]: true }));
         }
-      },
-      { threshold: 0.2 }
-    );
+      });
+    }, observerOptions);
 
-    const currentRef = sectionRef.current;
+    const refs = [
+      { ref: headerRef, name: 'header' },
+      { ref: pillarsRef, name: 'pillars' },
+      { ref: valuesRef, name: 'values' },
+      { ref: quoteRef, name: 'quote' },
+      { ref: approachRef, name: 'approach' },
+      { ref: statsRef, name: 'stats' }
+    ];
 
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
+    refs.forEach(({ ref, name }) => {
+      if (ref.current) {
+        ref.current.dataset.section = name;
+        observer.observe(ref.current);
+      }
+    });
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
+      refs.forEach(({ ref }) => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      });
     };
   }, []);
 
@@ -43,7 +72,8 @@ const PhilosophySection = () => {
         'Multi-decade investment horizons',
         'Flexible milestone frameworks',
         'No rushed exit pressures'
-      ]
+      ],
+      direction: 'left'
     },
     {
       id: 'measured-risk',
@@ -56,7 +86,8 @@ const PhilosophySection = () => {
         'Advanced risk modeling',
         'Asset-backed structures',
         'Multiple security layers'
-      ]
+      ],
+      direction: 'up'
     },
     {
       id: 'due-diligence',
@@ -69,7 +100,8 @@ const PhilosophySection = () => {
         'On-ground verification teams',
         'Multi-jurisdictional compliance',
         'Cultural intelligence integration'
-      ]
+      ],
+      direction: 'right'
     },
     {
       id: 'impact-monitoring',
@@ -82,7 +114,8 @@ const PhilosophySection = () => {
         'Quarterly impact assessments',
         'Real-time reporting dashboards',
         'Milestone-based releases'
-      ]
+      ],
+      direction: 'left'
     },
     {
       id: 'exit-strategies',
@@ -95,9 +128,9 @@ const PhilosophySection = () => {
         'Pre-structured exit options',
         'Market-adaptive strategies',
         'Partner-first approach'
-      ]
+      ],
+      direction: 'down'
     },
-    
     {
       id: 'legacy-building',
       icon: '🏛️',
@@ -109,7 +142,8 @@ const PhilosophySection = () => {
         'Multi-generational impact',
         'Cultural preservation',
         'Sustainable development'
-      ]
+      ],
+      direction: 'right'
     }
   ];
 
@@ -136,17 +170,48 @@ const PhilosophySection = () => {
     }
   ];
 
+  const timelineSteps = [
+    {
+      number: '01',
+      title: 'Initial Assessment',
+      description: 'Comprehensive project evaluation including market analysis, risk profiling, and impact potential assessment.',
+      direction: 'left'
+    },
+    {
+      number: '02',
+      title: 'Due Diligence',
+      description: 'On-ground verification, legal compliance review, and stakeholder interviews across all relevant jurisdictions.',
+      direction: 'right'
+    },
+    {
+      number: '03',
+      title: 'Structuring',
+      description: 'Custom capital structure design with milestone-based funding, security frameworks, and exit pathways.',
+      direction: 'left'
+    },
+    {
+      number: '04',
+      title: 'Active Partnership',
+      description: 'Ongoing support, quarterly reviews, and strategic guidance throughout the investment lifecycle.',
+      direction: 'right'
+    }
+  ];
+
+  const stats = [
+    { icon: '✓', number: '100%', label: 'Compliance Rate' },
+    { icon: '📈', number: '62+', label: 'Successful Deals' },
+    { icon: '🌍', number: '17', label: 'Countries' },
+    { icon: '⭐', number: 'Zero', label: 'Default Rate' }
+  ];
+
   return (
     <section className="philosophy-section" id="philosophy" ref={sectionRef}>
-      {loading && (
-        <div className="loading-overlay">
-          <div className="loading-spinner"></div>
-          <p>Loading Philosophy...</p>
-        </div>
-      )}
       <div className="philosophy-container">
         {/* Header */}
-        <div className={`philosophy-header ${isVisible ? 'visible' : ''}`}>
+        <div 
+          ref={headerRef}
+          className={`philosophy-header ${visibleSections.header ? 'visible' : ''}`}
+        >
           <span className="philosophy-badge">Investment Philosophy</span>
           <h2 className="philosophy-title">
             A Philosophy Built on
@@ -161,16 +226,20 @@ const PhilosophySection = () => {
         </div>
 
         {/* Five Pillars */}
-        <div className={`pillars-section ${isVisible ? 'visible' : ''}`}>
-          <h3 className="pillars-title">Five Key Pillars</h3>
+        <div 
+          ref={pillarsRef}
+          className={`pillars-section ${visibleSections.pillars ? 'visible' : ''}`}
+        >
+          <h3 className="pillars-title">Six Key Pillars</h3>
           
           <div className="pillars-grid">
             {pillars.map((pillar, index) => (
               <div
                 key={pillar.id}
-                className={`pillar-card ${activePillar === pillar.id ? 'active' : ''}`}
+                className={`pillar-card slide-${pillar.direction} ${activePillar === pillar.id ? 'active' : ''}`}
                 onMouseEnter={() => setActivePillar(pillar.id)}
                 onMouseLeave={() => setActivePillar(null)}
+                onClick={() => setActivePillar(activePillar === pillar.id ? null : pillar.id)}
                 style={{
                   '--pillar-color': pillar.color,
                   animationDelay: `${index * 0.1}s`
@@ -203,13 +272,16 @@ const PhilosophySection = () => {
         </div>
 
         {/* Core Values */}
-        <div className={`values-section ${isVisible ? 'visible' : ''}`}>
+        <div 
+          ref={valuesRef}
+          className={`values-section ${visibleSections.values ? 'visible' : ''}`}
+        >
           <h3 className="values-title">Core Values</h3>
           <div className="values-grid">
             {coreValues.map((value, index) => (
               <div
                 key={index}
-                className="value-card"
+                className={`value-card slide-${['left', 'up', 'down', 'right'][index % 4]}`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="value-icon">{value.icon}</div>
@@ -221,7 +293,10 @@ const PhilosophySection = () => {
         </div>
 
         {/* Philosophy Quote */}
-        <div className={`philosophy-quote-section ${isVisible ? 'visible' : ''}`}>
+        <div 
+          ref={quoteRef}
+          className={`philosophy-quote-section ${visibleSections.quote ? 'visible' : ''}`}
+        >
           <div className="quote-container">
             <div className="quote-decoration">
               <div className="decoration-line"></div>
@@ -258,101 +333,47 @@ const PhilosophySection = () => {
         </div>
 
         {/* Approach Timeline */}
-        <div className={`approach-section ${isVisible ? 'visible' : ''}`}>
+        <div 
+          ref={approachRef}
+          className={`approach-section ${visibleSections.approach ? 'visible' : ''}`}
+        >
           <h3 className="approach-title">Our Investment Approach</h3>
           
           <div className="approach-timeline">
-            <div className="timeline-item">
-              <div className="timeline-number">01</div>
-              <div className="timeline-content">
-                <h4 className="timeline-title">Initial Assessment</h4>
-                <p className="timeline-description">
-                  Comprehensive project evaluation including market analysis, 
-                  risk profiling, and impact potential assessment.
-                </p>
-              </div>
-            </div>
-            
-            <div className="timeline-connector"></div>
-            
-            <div className="timeline-item">
-              <div className="timeline-number">02</div>
-              <div className="timeline-content">
-                <h4 className="timeline-title">Due Diligence</h4>
-                <p className="timeline-description">
-                  On-ground verification, legal compliance review, and 
-                  stakeholder interviews across all relevant jurisdictions.
-                </p>
-              </div>
-            </div>
-            
-            <div className="timeline-connector"></div>
-            
-            <div className="timeline-item">
-              <div className="timeline-number">03</div>
-              <div className="timeline-content">
-                <h4 className="timeline-title">Structuring</h4>
-                <p className="timeline-description">
-                  Custom capital structure design with milestone-based funding, 
-                  security frameworks, and exit pathways.
-                </p>
-              </div>
-            </div>
-            
-            <div className="timeline-connector"></div>
-            
-            <div className="timeline-item">
-              <div className="timeline-number">04</div>
-              <div className="timeline-content">
-                <h4 className="timeline-title">Active Partnership</h4>
-                <p className="timeline-description">
-                  Ongoing support, quarterly reviews, and strategic guidance 
-                  throughout the investment lifecycle.
-                </p>
-              </div>
-            </div>
+            {timelineSteps.map((step, index) => (
+              <React.Fragment key={step.number}>
+                <div className={`timeline-item slide-${step.direction}`}>
+                  <div className="timeline-number">{step.number}</div>
+                  <div className="timeline-content">
+                    <h4 className="timeline-title">{step.title}</h4>
+                    <p className="timeline-description">{step.description}</p>
+                  </div>
+                </div>
+                {index < timelineSteps.length - 1 && (
+                  <div className="timeline-connector"></div>
+                )}
+              </React.Fragment>
+            ))}
           </div>
         </div>
 
         {/* Stats Bar */}
-        <div className={`philosophy-stats ${isVisible ? 'visible' : ''}`}>
-          <div className="stat-item">
-            <div className="stat-icon">✓</div>
-            <div className="stat-content">
-              <div className="stat-number">100%</div>
-              <div className="stat-label">Compliance Rate</div>
-            </div>
-          </div>
-          
-          <div className="stat-divider"></div>
-          
-          <div className="stat-item">
-            <div className="stat-icon">📈</div>
-            <div className="stat-content">
-              <div className="stat-number">62+</div>
-              <div className="stat-label">Successful Deals</div>
-            </div>
-          </div>
-          
-          <div className="stat-divider"></div>
-          
-          <div className="stat-item">
-            <div className="stat-icon">🌍</div>
-            <div className="stat-content">
-              <div className="stat-number">17</div>
-              <div className="stat-label">Countries</div>
-            </div>
-          </div>
-          
-          <div className="stat-divider"></div>
-          
-          <div className="stat-item">
-            <div className="stat-icon">⭐</div>
-            <div className="stat-content">
-              <div className="stat-number">Zero</div>
-              <div className="stat-label">Default Rate</div>
-            </div>
-          </div>
+        <div 
+          ref={statsRef}
+          className={`philosophy-stats ${visibleSections.stats ? 'visible' : ''}`}
+        >
+          {stats.map((stat, index) => (
+            <React.Fragment key={index}>
+              <div className="stat-item">
+                <div className="stat-icon">{stat.icon}</div>
+                <div className="stat-content">
+                  <div className="stat-number">{stat.number}</div>
+                  <div className="stat-label">{stat.label}</div>
+                </div>
+              </div>
+              {index < stats.length - 1 && <div className="stat-divider"></div>}
+            </React.Fragment>
+          ))}
         </div>
       </div>
 
