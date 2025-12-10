@@ -13,11 +13,10 @@ const NetworkSection = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     const currentRef = sectionRef.current;
-
     if (currentRef) {
       observer.observe(currentRef);
     }
@@ -154,7 +153,6 @@ const NetworkSection = () => {
                 </linearGradient>
               </defs>
               
-              {/* Europe to Africa */}
               <path 
                 className="connection-line" 
                 d="M 250 150 Q 280 200, 300 250" 
@@ -164,7 +162,6 @@ const NetworkSection = () => {
                 opacity="0.6"
               />
               
-              {/* Europe to Asia */}
               <path 
                 className="connection-line" 
                 d="M 300 150 Q 450 120, 600 180" 
@@ -174,7 +171,6 @@ const NetworkSection = () => {
                 opacity="0.6"
               />
               
-              {/* Africa to Asia */}
               <path 
                 className="connection-line" 
                 d="M 350 280 Q 450 250, 580 220" 
