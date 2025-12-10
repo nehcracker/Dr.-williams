@@ -1,206 +1,817 @@
-/* src/styles/components/submission.scss */
+// ============================================
+// SUBMISSION SECTION - COMPLETE REDESIGN
+// ============================================
+
+@import '../../styles/foundation/variables';
+@import '../../styles/foundation/mixins';
 
 .submission-section {
-  padding: 5rem 0;
-  background-color: #f7f9fc;
+  position: relative;
+  padding: $spacing-5 0;
+  background: linear-gradient(180deg, $bg-primary 0%, $bg-secondary 100%);
+  overflow: hidden;
+  min-height: 100vh;
   
-  .submission-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+  @include respond-below(lg) {
+    padding: $spacing-16 0;
   }
   
-  .submission-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    
-    h2 {
-      font-size: 2.5rem;
-      color: #1a3a5f;
-      margin-bottom: 1rem;
-      font-weight: 600;
+  @include respond-below(md) {
+    padding: $spacing-12 0;
+  }
+}
+
+// ============================================
+// BACKGROUND
+// ============================================
+
+.submission-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.bg-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba($primary-700, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($primary-700, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.5;
+}
+
+.bg-gradient-1 {
+  position: absolute;
+  top: 10%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba($accent-500, 0.08), transparent);
+  animation: gradientFloat 20s ease-in-out infinite;
+}
+
+.bg-gradient-2 {
+  position: absolute;
+  bottom: 10%;
+  left: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba($primary-500, 0.06), transparent);
+  animation: gradientFloat 25s ease-in-out infinite reverse;
+}
+
+@keyframes gradientFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -20px) scale(1.1);
+  }
+}
+
+// ============================================
+// CONTAINER
+// ============================================
+
+.submission-container {
+  @include container($container-2xl);
+  position: relative;
+  z-index: 2;
+}
+
+// ============================================
+// HEADER
+// ============================================
+
+.submission-header {
+  text-align: center;
+  margin-bottom: $spacing-12;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out;
+  position: relative;
+  z-index: 2;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.submission-badge {
+  display: inline-block;
+  padding: $spacing-2 $spacing-5;
+  background: linear-gradient(135deg, rgba($accent-600, 0.1), rgba($primary-600, 0.1));
+  border: 1px solid rgba($accent-600, 0.2);
+  border-radius: $radius-full;
+  color: $accent-700;
+  font-size: $font-size-sm;
+  font-weight: $font-semibold;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+  margin-bottom: $spacing-6;
+}
+
+.submission-title {
+  @include heading-2;
+  margin-bottom: $spacing-5;
+  
+  .gradient-text {
+    @include gradient-text($gradient-primary);
+  }
+}
+
+.submission-subtitle {
+  @include body-large;
+  color: $text-secondary;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: $line-height-relaxed;
+}
+
+// ============================================
+// FORM WRAPPER
+// ============================================
+
+.submission-form-wrapper {
+  background: $bg-primary;
+  border-radius: $radius-3xl;
+  padding: $spacing-10;
+  box-shadow: $shadow-2xl;
+  border: 1px solid $border-light;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out 0.2s;
+  position: relative;
+  z-index: 2;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @include respond-below(md) {
+    padding: $spacing-6;
+    border-radius: $radius-2xl;
+  }
+}
+
+// ============================================
+// PROGRESS INDICATOR
+// ============================================
+
+.progress-container {
+  margin-bottom: $spacing-10;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $spacing-5;
+  position: relative;
+  
+  @include respond-below(md) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-4;
+  }
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-3;
+  flex: 1;
+  position: relative;
+  
+  &.active {
+    .step-circle {
+      background: $gradient-primary;
+      color: $text-inverse;
+      border-color: $primary-500;
+      transform: scale(1.1);
     }
     
-    p {
-      font-size: 1.1rem;
-      color: #556677;
-      max-width: 600px;
-      margin: 0 auto;
+    .step-label {
+      color: $text-primary;
+      font-weight: $font-semibold;
     }
   }
   
-  .submission-form {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 3rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      
-      .form-group {
-        &.full-width {
-          grid-column: span 2;
-        }
-        
-        label {
-          display: block;
-          margin-bottom: 0.5rem;
-          font-weight: 500;
-          color: #1a3a5f;
-        }
-        
-        input, textarea {
-          width: 100%;
-          padding: 0.75rem 1rem;
-          border: 1px solid #dce2e9;
-          border-radius: 4px;
-          font-size: 1rem;
-          transition: border-color 0.3s;
-          
-          &:focus {
-            outline: none;
-            border-color: #2c7be5;
-            box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.1);
-          }
-        }
-        
-        textarea {
-          resize: vertical;
-          min-height: 120px;
-        }
-        
-        .file-upload {
-          position: relative;
-          
-          input[type="file"] {
-            padding: 0.8rem;
-            background-color: #f1f4f9;
-          }
-          
-          .file-hint {
-            margin-top: 0.5rem;
-            font-size: 0.85rem;
-            color: #7d8da3;
-          }
-        }
-      }
+  &.completed {
+    .step-circle {
+      background: $gradient-success;
+      color: $text-inverse;
+      //border-color: $success-500;
     }
+  }
+}
+
+.step-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-full;
+  background: $bg-secondary;
+  border: 2px solid $border-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $font-bold;
+  font-size: $font-size-lg;
+  transition: $transition-all;
+  z-index: 2;
+  position: relative;
+}
+
+.step-label {
+  font-size: $font-size-sm;
+  color: $text-muted;
+  font-weight: $font-medium;
+  transition: $transition-all;
+  text-align: center;
+}
+
+.progress-bar {
+  height: 4px;
+  background: $bg-secondary;
+  border-radius: $radius-full;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: $gradient-primary;
+  border-radius: $radius-full;
+  transition: width 0.3s $ease-out;
+}
+
+// ============================================
+// FORM STEPS
+// ============================================
+
+.submission-form {
+  min-height: 400px;
+}
+
+.form-step {
+  animation: fadeInStep 0.5s $ease-out;
+}
+
+@keyframes fadeInStep {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.step-header {
+  text-align: center;
+  margin-bottom: $spacing-8;
+  
+  h3 {
+    @include heading-3;
+    margin-bottom: $spacing-3;
+  }
+  
+  p {
+    @include body-base;
+    color: $text-secondary;
+  }
+}
+
+// ============================================
+// FORM ELEMENTS
+// ============================================
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-6;
+  
+  @include respond-below(md) {
+    grid-template-columns: 1fr;
+    gap: $spacing-5;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  
+  &.full-width {
+    grid-column: span 2;
     
-    .error-message {
-      color: #e63757;
-      padding: 1rem;
-      margin: 1.5rem 0;
-      background-color: #ffe8ed;
-      border-radius: 4px;
-      font-size: 0.95rem;
-    }
-    
-    .form-actions {
-      margin-top: 2.5rem;
-      text-align: center;
-      
-      button {
-        padding: 0.8rem 2.5rem;
-        font-size: 1rem;
-        font-weight: 500;
-        background-color: #1a3a5f;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        
-        &:hover {
-          background-color: #12293f;
-        }
-        
-        &:disabled {
-          background-color: #a0aec0;
-          cursor: not-allowed;
-        }
-      }
+    @include respond-below(md) {
+      grid-column: 1;
     }
   }
   
-  .submission-success {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 3rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    text-align: center;
+  label {
+    font-size: $font-size-sm;
+    font-weight: $font-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-3;
     
-    .success-icon {
-      width: 70px;
-      height: 70px;
-      background-color: #00b894;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin: 0 auto 1.5rem;
+    .required {
+      //color: $error-600;
+      margin-left: $spacing-1;
+    }
+  }
+  
+  input,
+  textarea,
+  select {
+    padding: $spacing-4 $spacing-5;
+    border: 2px solid $border-light;
+    border-radius: $radius-lg;
+    font-size: $font-size-base;
+    font-family: $font-body;
+    color: $text-primary;
+    background: $bg-primary;
+    transition: $transition-all;
+    
+    &::placeholder {
+      color: $text-muted;
     }
     
-    h3 {
-      color: #1a3a5f;
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
+    &:focus {
+      outline: none;
+      border-color: $primary-500;
+      box-shadow: 0 0 0 4px rgba($primary-500, 0.1);
     }
     
-    p {
-      color: #556677;
-      margin-bottom: 2rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+    &:hover {
+      border-color: $primary-300;
     }
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: $line-height-relaxed;
+  }
+  
+  select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23556677' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right $spacing-4 center;
+    padding-right: $spacing-10;
+  }
+}
+
+.input-hint,
+.char-count {
+  font-size: $font-size-xs;
+  color: $text-muted;
+  margin-top: $spacing-2;
+}
+
+.char-count {
+  text-align: right;
+}
+
+// ============================================
+// FILE UPLOAD
+// ============================================
+
+.file-upload-area {
+  position: relative;
+  border: 2px dashed $border-light;
+  border-radius: $radius-lg;
+  padding: $spacing-8;
+  text-align: center;
+  background: $bg-secondary;
+  transition: $transition-all;
+  cursor: pointer;
+  
+  &:hover {
+    border-color: $primary-400;
+    background: rgba($primary-100, 0.3);
+  }
+  
+  input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+}
+
+.file-upload-content {
+  pointer-events: none;
+}
+
+.upload-icon {
+  font-size: $font-size-4xl;
+  margin-bottom: $spacing-3;
+}
+
+.upload-text {
+  font-size: $font-size-base;
+  color: $text-secondary;
+  margin-bottom: $spacing-2;
+  
+  strong {
+    color: $primary-600;
+  }
+}
+
+.upload-hint {
+  font-size: $font-size-sm;
+  color: $text-muted;
+}
+
+.file-name {
+  margin-top: $spacing-4;
+  padding: $spacing-3 $spacing-4;
+  background: $primary-50;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  color: $primary-700;
+  font-weight: $font-medium;
+}
+
+// ============================================
+// DOCUMENT CHECKLIST
+// ============================================
+
+.document-checklist {
+  background: $bg-secondary;
+  border-radius: $radius-lg;
+  padding: $spacing-6;
+  border-left: 4px solid $primary-500;
+  
+  h4 {
+    font-size: $font-size-base;
+    font-weight: $font-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-4;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     
-    button {
-      padding: 0.8rem 2rem;
-      background-color: #1a3a5f;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
+    li {
+      padding: $spacing-2 0;
+      font-size: $font-size-sm;
+      color: $text-secondary;
+      position: relative;
+      padding-left: $spacing-6;
       
-      &:hover {
-        background-color: #12293f;
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        //color: $success-600;
+        font-weight: $font-bold;
       }
     }
   }
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+// ============================================
+// ERROR MESSAGE
+// ============================================
+
+.error-message {
+ // background: rgba($error-50, 0.5);
+  //border: 1px solid $error-200;
+  border-radius: $radius-lg;
+  padding: $spacing-4 $spacing-5;
+  margin-top: $spacing-6;
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  //color: $error-700;
+  font-size: $font-size-sm;
+  
+  .error-icon {
+    font-size: $font-size-xl;
+  }
+}
+
+// ============================================
+// NAVIGATION BUTTONS
+// ============================================
+
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: $spacing-10;
+  gap: $spacing-4;
+  
+  button {
+    @include button-base;
+    padding: $spacing-4 $spacing-8;
+    font-size: $font-size-base;
+    font-weight: $font-semibold;
+    cursor: pointer;
+    transition: $transition-all;
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.btn-prev {
+  background: transparent;
+  color: $text-secondary;
+  border: 2px solid $border-light;
+  
+  &:hover:not(:disabled) {
+    border-color: $primary-300;
+    color: $primary-600;
+    transform: translateX(-4px);
+  }
+}
+
+.btn-next,
+.btn-submit {
+  background: $gradient-primary;
+  color: $text-inverse;
+  border: none;
+  box-shadow: $shadow-md;
+  margin-left: auto;
+  
+  &:hover:not(:disabled) {
+    box-shadow: $shadow-lg;
+    transform: translateY(-2px);
+  }
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: $spacing-2;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ============================================
+// TRUST INDICATORS
+// ============================================
+
+.trust-indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-8;
+  margin-top: $spacing-8;
+  padding-top: $spacing-8;
+  border-top: 1px solid $border-light;
+  
+  @include respond-below(md) {
+    flex-direction: column;
+    gap: $spacing-4;
+  }
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  
+  .trust-icon {
+    font-size: $font-size-xl;
+  }
+  
+  .trust-text {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    font-weight: $font-medium;
+  }
+}
+
+// ============================================
+// SUCCESS STATE
+// ============================================
+
+.submission-success {
+  background: $bg-primary;
+  border-radius: $radius-3xl;
+  padding: $spacing-12;
+  box-shadow: $shadow-2xl;
+  border: 1px solid $border-light;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s $ease-out 0.2s;
+  position: relative;
+  z-index: 2;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @include respond-below(md) {
+    padding: $spacing-8;
+  }
+}
+
+.success-animation {
+  position: relative;
+  display: inline-block;
+  margin-bottom: $spacing-8;
+}
+
+.success-circle {
+  width: 100px;
+  height: 100px;
+  background: $gradient-success;
+  border-radius: $radius-full;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  animation: successPop 0.6s $ease-out;
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.success-icon {
+  font-size: $font-size-4xl;
+  color: $text-inverse;
+  font-weight: $font-bold;
+}
+
+.success-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: $radius-full;
+ // border: 3px solid $success-400;
+  animation: ripple 2s ease-out infinite;
+}
+
+@keyframes ripple {
+  0% {
+    width: 100px;
+    height: 100px;
+    opacity: 1;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
+.success-title {
+  @include heading-3;
+  margin-bottom: $spacing-4;
+  color: $text-primary;
+}
+
+.success-message {
+  @include body-large;
+  color: $text-secondary;
+  max-width: 600px;
+  margin: 0 auto $spacing-8;
+  line-height: $line-height-relaxed;
+}
+
+.success-next-steps {
+  background: $bg-secondary;
+  border-radius: $radius-2xl;
+  padding: $spacing-8;
+  margin-bottom: $spacing-8;
+  
+  h4 {
+    font-size: $font-size-lg;
+    font-weight: $font-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-6;
+  }
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-4;
+  
+  @include respond-below(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include respond-below(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.step-item {
+  text-align: center;
+  padding: $spacing-4;
+  
+  .step-icon {
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-3;
+  }
+  
+  .step-text {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    line-height: $line-height-relaxed;
+  }
+}
+
+.success-button {
+  @include button-base;
+  background: $gradient-primary;
+  color: $text-inverse;
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-base;
+  font-weight: $font-semibold;
+  border: none;
+  box-shadow: $shadow-md;
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-2px);
+  }
+}
+
+// ============================================
+// REDUCED MOTION
+// ============================================
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-gradient-1,
+  .bg-gradient-2,
+  .success-circle,
+  .success-ripple,
+  .spinner {
+    animation: none;
+  }
+  
+  .submission-header,
+  .submission-form-wrapper,
+  .submission-success,
+  .form-step {
+    transition-duration: 0.01ms;
+    animation: none;
+  }
+}
+
+// ============================================
+// PRINT STYLES
+// ============================================
+
+@media print {
+  .submission-background,
+  .progress-container,
+  .form-navigation,
+  .trust-indicators {
+    display: none;
+  }
+  
   .submission-section {
-    padding: 3rem 0;
-    
-    .submission-container {
-      padding: 0 1rem;
-    }
-    
-    .submission-header {
-      h2 {
-        font-size: 2rem;
-      }
-    }
-    
-    .submission-form, .submission-success {
-      padding: 2rem 1.5rem;
-      
-      .form-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        
-        .form-group.full-width {
-          grid-column: 1;
-        }
-      }
-    }
+    padding: $spacing-7 0;
   }
 }
